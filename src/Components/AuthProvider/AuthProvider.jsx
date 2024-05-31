@@ -8,7 +8,7 @@ import {
     signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../Firebase/Firebase.init";
+import { auth } from "../Firebase/firebase.init";
 
 export const AuthContext = createContext(null);
 // eslint-disable-next-line react/prop-types
