@@ -3,8 +3,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthProvider from "./Components/AuthProvider/AuthProvider";
+import AddProducts from "./Components/Dashboard/AddProducts";
 import Error from "./Components/ErrorRoute/Error";
 import Home from "./Components/Home/Home";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import Products from "./Components/Products/Products";
 import Root from "./Components/Root/Root";
 import Login from "./Components/User/Login";
 import Signup from "./Components/User/Signup";
@@ -28,7 +31,15 @@ const router = createBrowserRouter([
       },
       {
         path:'/signUp',
-      element:<Signup/>
+        element:<Signup/>
+      },
+      {
+        path:'/products',
+        element:<Products/>
+      },
+      {
+        path:'/addproducts',
+        element:<PrivateRoute><AddProducts/></PrivateRoute>
       }
     ],
   },

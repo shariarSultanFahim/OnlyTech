@@ -8,6 +8,7 @@ const ProductCard = () => {
                     </div>
                     <div className="p-4 space-y-4">
                         <h1 className="text-md md:text-lg lg:text-xl font-bold">ChatGPT</h1>
+                        <p>Author: Shariar Sultan</p>
                         <div className="flex">
                             <h1 className="py-2 px-4 rounded-full text-center bg-secendaryColor">AI</h1>
                         </div>
