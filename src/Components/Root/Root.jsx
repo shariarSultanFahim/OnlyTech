@@ -6,7 +6,7 @@ const Root = () => {
   return (
     <div className="bg-secendaryColor min-h-screen">
       <Navbar />
-      <div className="container mx-auto max-w-screen-xl">
+      <div className="">
         <Outlet />
       </div>
       <Footer/>

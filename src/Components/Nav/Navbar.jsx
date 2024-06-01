@@ -62,7 +62,7 @@ const items = <>
                 </div>
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                <li><Link>{user?.displayName}</Link></li>
+                <li className="text-center font-semibold py-4">{user?.displayName}</li>
                 <li><Link to='/dashboard'>Dashboard</Link></li>
                 <li onClick={handleLogout}><Link>Logout</Link></li>
             </ul>
