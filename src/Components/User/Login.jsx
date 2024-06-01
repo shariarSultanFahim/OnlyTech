@@ -126,7 +126,7 @@ useEffect(()=>{
                 </a>
                 </div>
                 <label className="label">
-                    <Link to='/signUp' className="label-text-alt link link-hover">Register</Link>
+                    <Link to='/signUp' className="label-text-alt link link-hover">Sign Up</Link>
                 </label>
                 </div>
                 <div className="form-control mt-6">
