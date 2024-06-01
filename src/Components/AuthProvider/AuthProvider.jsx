@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -7,6 +8,7 @@ import {
   signOut
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import { auth } from "../Firebase/firebase.init";
 
 export const AuthContext = createContext(null);
@@ -42,6 +44,16 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  const axiosSecure = useAxiosSecure();
+  const {data:products, isPending:productsLoadig,refetch:refetchProducts} = useQuery({
+    queryKey:['products'],
+    queryFn: async ()=>{
+      const res =await axiosSecure.get('/products')
+      return res.data
+    }
+  })
+  console.log(products)
+
   const authInfo = {
     user,
     setUser,
@@ -51,6 +63,9 @@ const AuthProvider = ({ children }) => {
     loginUser,
     googleLogin,
     logOut,
+    products,
+    productsLoadig,
+    refetchProducts
   };
 
   return (

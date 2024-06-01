@@ -7,7 +7,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const AddProducts = () => {
     useDocumentTitle('Add Products');
-    const {user}=useContext(AuthContext);
+    const {user,refetchProducts}=useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
     const handleAddProduct = async(e) =>{
@@ -42,6 +42,7 @@ const AddProducts = () => {
                 },
               });
             e.target.reset();
+            refetchProducts();
         }catch(error){
             toast.error(error.massege,{
                 position:"top-center",
