@@ -1,0 +1,56 @@
+[
+  {
+    "product_image": "https://blog.routinehub.co/content/images/2023/02/openAI-chat-gpt-1.jpg",
+    "product_name": "ChatGPT",
+    "tags": ["AI", "tool", "language model"],
+    "product_description": "ChatGPT is an AI language model developed by OpenAI, capable of understanding and generating human-like text."
+  },
+  {
+    "product_image": "https://cdn1.epicgames.com/offer/14ee004dadc142faaaece5a6270fb628/EGS_TheWitcher3WildHuntCompleteEdition_CDPROJEKTRED_S1_2560x1440-82eb5cf8f725e329d3194920c0c0b64f",
+    "product_name": "The Witcher 3: Wild Hunt",
+    "tags": ["game", "PC", "RPG"],
+    "product_description": "The Witcher 3: Wild Hunt is an action role-playing game with a rich narrative and expansive open world."
+  },
+  {
+    "product_image": "https://i.pcmag.com/imagery/reviews/04skVpDXdyuLgqavF9k35sX-10.fit_scale.size_760x427.v1575422583.jpg",
+    "product_name": "Squarespace",
+    "tags": ["web app", "website builder", "e-commerce"],
+    "product_description": "Squarespace is a website building and hosting platform that allows users to create and manage websites easily."
+  },
+  {
+    "product_image": "https://www.cnet.com/a/img/resize/bfa0f22830953663e48f33818a8be83e8936378b/hub/2014/02/12/7cd609cb-c16d-4521-b438-6002c3e02c3a/myfitnesspal-windows-phone.png?auto=webp&fit=crop&height=900&width=1200",
+    "product_name": "MyFitnessPal",
+    "tags": ["mobile app", "health", "fitness"],
+    "product_description": "MyFitnessPal is a mobile app that helps you track your diet and exercise to meet your fitness goals."
+  },
+  {
+    "product_image": "https://s38924.pcdn.co/wp-content/uploads/2021/09/Slack-1-scaled-1-1360x692.jpg",
+    "product_name": "Slack",
+    "tags": ["web app", "communication", "collaboration"],
+    "product_description": "Slack is a messaging app for teams that brings all your communication together in one place."
+  },
+  {
+    "product_image": "https://gravityflow.io/wp-content/uploads/2018/07/FEATURED-IMAGE-zapier-gravity-forms-gravity-flow.jpg",
+    "product_name": "Zapier",
+    "tags": ["web app", "automation", "productivity"],
+    "product_description": "Zapier automates your work across 2,000+ apps, so you can focus on what matters most."
+  },
+  {
+    "product_image": "https://miro.medium.com/v2/resize:fit:1170/1*BnpPe7u0t-e8hHc-qEmgSQ.png",
+    "product_name": "Visual Studio Code",
+    "tags": ["software", "development", "code editor"],
+    "product_description": "Visual Studio Code is a free source-code editor made by Microsoft for Windows, Linux, and macOS."
+  },
+  {
+    "product_image": "https://i.ytimg.com/vi/0YKjFoGxbec/maxresdefault.jpg",
+    "product_name": "Among Us",
+    "tags": ["game", "mobile", "multiplayer"],
+    "product_description": "Among Us is an online multiplayer game where players work together to complete tasks while impostors attempt to sabotage them."
+  },
+  {
+    "product_image": "https://miro.medium.com/v2/resize:fit:1400/1*-2iA0pHLSuzOSWYPITuZ0g.png",
+    "product_name": "YNAB",
+    "tags": ["mobile app", "finance", "budgeting"],
+    "product_description": "YNAB is a personal budgeting app that helps you gain total control of your money."
+  }
+]
