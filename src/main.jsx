@@ -6,6 +6,8 @@ import AuthProvider from "./Components/AuthProvider/AuthProvider";
 import Error from "./Components/ErrorRoute/Error";
 import Home from "./Components/Home/Home";
 import Root from "./Components/Root/Root";
+import Login from "./Components/User/Login";
+import Signup from "./Components/User/Signup";
 import "./index.css";
 
 const queryClient = new QueryClient();
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path:'/login',
+        element:<Login/>
+      },
+      {
+        path:'/signUp',
+      element:<Signup/>
+      }
     ],
   },
 ]);
