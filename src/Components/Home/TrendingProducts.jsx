@@ -3,11 +3,11 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import Header from "../Header/Header";
 import ProductCard from "../ProductCard/ProductCard";
 
-const FeaturedProducts = () => {
+const TrendingProducts = () => {
     const {products} = useContext(AuthContext);
     return (
         <div className="pt-20">
-            <Header title={'Featured Products'} subtitle={'Handpicked Tech Tools and Apps Just for You'}/>
+            <Header title={'Discover the Latest Trends'} subtitle={'Explore Our Selection of Trending Products Across Various Categories'}/>
             
             <div className="my-10 flex flex-wrap gap-6">
                 {
@@ -18,4 +18,4 @@ const FeaturedProducts = () => {
     );
 };
 
-export default FeaturedProducts;
+export default TrendingProducts;
