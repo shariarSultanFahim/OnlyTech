@@ -8,7 +8,7 @@ const Products = () => {
     const axiosSecure = useAxiosSecure();
     const [searchKeyWord, setSearchKeyWord] = useState('');
 
-    const {data:searcedProducts, isPending,refetch} = useQuery({
+    const {data:searcedProducts, isPending,refetch:refetchSearchedProducts} = useQuery({
         queryKey:['searchedProducts',searchKeyWord],
         queryFn: async (searchKeyWord)=>{
           console.log(searchKeyWord.queryKey[1]);
@@ -52,7 +52,7 @@ const Products = () => {
         const search  = e.target.search.value;
         setSearchKeyWord(search);
         setCurrentPage(1);
-        refetch();
+        refetchSearchedProducts();
       }
 
     return (
@@ -66,7 +66,7 @@ const Products = () => {
             <div className="my-10 flex flex-wrap gap-6">
                 {
                     isPending?<span className="loading loading-dots loading-lg mx-auto"></span>
-                    :currentProducts?.map(product => <ProductCard  key={product._id} product={product}  /> )
+                    :currentProducts?.map(product => <ProductCard  key={product._id} product={product} refetchSearchedProducts={refetchSearchedProducts}  /> )
                 }
             </div>
             <div className="join my-10 flex justify-center">

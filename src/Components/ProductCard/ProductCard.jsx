@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product,refetchSearchedProducts}) => {
 
     const {user,refetchProducts}=useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const handleUpVote = () =>{
-        axiosSecure.post(`products/${product._id}`);
+        axiosSecure.post(`products/vote?id=${product._id}&email=${user?.email}`);
         refetchProducts();
+        if(refetchSearchedProducts)
+            refetchSearchedProducts();
     }
     return (
         <div className="max-w-sm mx-auto flex flex-col rounded-lg bg-primaryColor">
@@ -27,7 +29,7 @@ const ProductCard = ({product}) => {
                     </div>
                     <div>
                         {
-                            user?<button onClick={handleUpVote}disabled={product.email == user?.email} className="inline-flex items-center"><IoMdArrowDropup className="text-5xl"/>{product?.upVote}</button>
+                            user?<button onClick={handleUpVote}disabled={product.email == user?.email || product?.upvoteEmail?.includes(user?.email)} className="inline-flex items-center"><IoMdArrowDropup className="text-5xl"/>{product?.upVote}</button>
                             :<Link to='/login'><button className="inline-flex items-center"><IoMdArrowDropup className="text-5xl"/>{product?.upVote}</button></Link>
                         }
                         
