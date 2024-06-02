@@ -11,7 +11,7 @@ const FeaturedProducts = () => {
             
             <div className="my-10 flex flex-wrap gap-6">
                 {
-                    products?.map(product => <ProductCard  key={product._id} product={product}  /> )
+                    products?.slice(0,6).map(product => <ProductCard  key={product._id} product={product}  /> )
                 }
             </div>
         </div>

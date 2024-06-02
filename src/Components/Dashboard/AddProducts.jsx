@@ -24,7 +24,8 @@ const AddProducts = () => {
             description,
             email : user?.email,
             author: user?.displayName,
-            postedTime: new Date().toISOString()
+            postedTime: new Date().toISOString(),
+            upVote:0
         }
 
         try{

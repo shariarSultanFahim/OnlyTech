@@ -1,6 +1,18 @@
+/* eslint-disable react/prop-types */
+import { useContext } from "react";
 import { IoMdArrowDropup } from "react-icons/io";
+import { Link } from "react-router-dom";
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const ProductCard = ({product}) => {
+
+    const {user,refetchProducts}=useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+    const handleUpVote = () =>{
+        axiosSecure.post(`products/${product._id}`);
+        refetchProducts();
+    }
     return (
         <div className="max-w-sm mx-auto flex flex-col rounded-lg bg-primaryColor">
                     <div className="overflow-hidden h-52 rounded-t-lg flex justify-center items-center">
@@ -14,7 +26,11 @@ const ProductCard = ({product}) => {
                         </div>
                     </div>
                     <div>
-                        <button className="inline-flex items-center"><IoMdArrowDropup className="text-5xl"/>Vote</button>
+                        {
+                            user?<button onClick={handleUpVote}disabled={product.email == user?.email} className="inline-flex items-center"><IoMdArrowDropup className="text-5xl"/>{product?.upVote}</button>
+                            :<Link to='/login'><button className="inline-flex items-center"><IoMdArrowDropup className="text-5xl"/>{product?.upVote}</button></Link>
+                        }
+                        
                     </div>
                 </div>
     );

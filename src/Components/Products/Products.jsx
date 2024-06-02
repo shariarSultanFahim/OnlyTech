@@ -23,7 +23,7 @@ const Products = () => {
             <div className="min-h-screen">
                 <form className=" my-10 flex justify-center ">
                 <div className="relative">
-                    <input type="text" name="search" className=" input input-bordered w-full max-w-xs"/>
+                    <input type="text" name="search" placeholder="ai,rpg,web,automation..." className=" input input-bordered w-full max-w-xs"/>
                     <button type="submit" className="absolute top-2 right-2"><IoSearchSharp className="text-3xl"/></button>
                 </div>
                 </form>
@@ -59,7 +59,7 @@ const Products = () => {
        <div>
             <form onSubmit={handleSearch} className=" my-10 flex justify-center ">
                 <div className="relative">
-                    <input type="text" name="search" className=" input input-bordered w-full max-w-xs"/>
+                    <input type="text" name="search"  placeholder="ai,rpg,web,automation..."  className=" input input-bordered w-full max-w-xs"/>
                     <button type="submit" className="absolute top-2 right-2"><IoSearchSharp className="text-3xl"/></button>
                 </div>
             </form>
