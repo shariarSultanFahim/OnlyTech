@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
       return res.data
     }
   })
-  console.log(products)
+
 
   const authInfo = {
     user,
