@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AiFillProduct, AiOutlineLogout, AiOutlineProduct } from "react-icons/ai";
-import { IoHome } from "react-icons/io5";
+import { AiOutlineLogout, AiOutlineMenu, AiOutlineProduct, AiOutlineProfile } from "react-icons/ai";
+import { IoHomeOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 const DashboardNavbar = () => {
@@ -8,21 +8,27 @@ const DashboardNavbar = () => {
 
 
   const items = <>
+  <NavLink to={"/"}>
+            <li className="inline-flex items-center gap-4">
+              <IoHomeOutline className="text-xl" />
+              Home
+            </li>
+    </NavLink>
     <NavLink to={"/dashboard/myProfile"}>
             <li className="inline-flex items-center gap-4">
-              <IoHome className="text-xl" />
+              <AiOutlineProfile className="text-xl" />
               My Profile
             </li>
     </NavLink>
     <NavLink to={"/dashboard/addProducts"}>
             <li className="inline-flex items-center gap-4">
-              <AiFillProduct className="text-xl" />
+              <AiOutlineProduct className="text-xl" />
               Add Products
             </li>
     </NavLink>
     <NavLink to={"/dashboard/myProducts"}>
             <li className="inline-flex items-center gap-4">
-              <AiOutlineProduct  className="text-xl" />
+              <AiOutlineMenu className="text-xl" />
               My Products
             </li>
     </NavLink>

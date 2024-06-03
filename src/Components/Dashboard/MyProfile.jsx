@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import ReactLoading from 'react-loading';
 import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
+import useDocumentTitle from "../../CustomHooks/useDocumentTitle";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const MyProfile = () => {
+    useDocumentTitle('Dashboard')
     const {user}=useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const {data:userData,isPending:userDataLoading} = useQuery({
@@ -28,7 +30,7 @@ const MyProfile = () => {
                 :
                 <div className="p-4 space-y-4 flex flex-col items-center">
                 <div className="overflow-hidden rounded-full h-52 w-52">
-                <img className="h-full w-full" src={userData?.photo} alt="User Photo" />
+                <img className="h-full w-full" src={user?.photoURL} alt="User Photo" />
                 </div>
                 <div className="w-full flex flex-col lg:flex-row justify-around gap-6">
                 <div className="w-full flex flex-col justify-between gap-6">

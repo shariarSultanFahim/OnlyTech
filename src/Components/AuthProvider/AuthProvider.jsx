@@ -53,6 +53,14 @@ const AuthProvider = ({ children }) => {
     }
   })
 
+  const {data:usersProducts,isPending:usersProductLoading,refetch:refetchUsersProducts}=useQuery({
+    queryKey:['usersProduct',user],
+    queryFn: async ()=>{
+        const res = await axiosSecure.get(`/products?email=${user?.email}`);
+        return res.data;
+    }
+})
+
 
   const authInfo = {
     user,
@@ -65,7 +73,10 @@ const AuthProvider = ({ children }) => {
     logOut,
     products,
     productsLoadig,
-    refetchProducts
+    refetchProducts,
+    usersProducts,
+    usersProductLoading,
+    refetchUsersProducts
   };
 
   return (

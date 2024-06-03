@@ -23,7 +23,8 @@
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.4",
     "react-router-dom": "^6.23.1",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.11.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
