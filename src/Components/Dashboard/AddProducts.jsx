@@ -14,12 +14,14 @@ const AddProducts = () => {
         e.preventDefault();
         const productName = e.target.productName.value;
         const productImg = e.target.productImg.value;
+        const productLink = e.target.productLink.value;
         const tag = e.target.tag.value;
         const description = e.target.description.value;
 
         const product = {
             productName,
             productImg,
+            productLink,
             tag,
             description,
             email : user?.email,
@@ -69,6 +71,9 @@ const AddProducts = () => {
                 </div>
                 <div className="form-control">
                      <input type="text" name="productImg" placeholder="product image url" className="input input-bordered bg-secendaryColor" required />
+                </div>
+                <div className="form-control">
+                     <input type="text" name="productLink" placeholder="product url" className="input input-bordered bg-secendaryColor" required />
                 </div>
                 <div className="form-control">
                      <input type="text" name="tag" placeholder="tag" className="input input-bordered bg-secendaryColor" required />
