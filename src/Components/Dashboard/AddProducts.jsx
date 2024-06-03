@@ -29,19 +29,19 @@ const AddProducts = () => {
       product = Object.assign({},data,additionalData)
 
       const imageFile = {image: data.productImg[0]};
-      const res =await axios.post(imagebb_api, imageFile, {
+      const res = await axios.post(imagebb_api, imageFile, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
-      // console.log(res.data);
+      console.log(res.data);
       if(res.data.success){
-        reset();
+      reset();
       // console.log(res.data.data.display_url);
       product.productImg = res.data.data.display_url;
       // console.log(product);
 
-      const res2 = await axiosSecure.post('/products/add',product);
+      await axiosSecure.post('/products/add',product);
       // console.log(res2)
       toast.success('Product Added Sucessfully',{
           position:"top-center",
@@ -56,7 +56,6 @@ const AddProducts = () => {
           },
         });
       refetchProducts();
-      
       } 
     
   }
@@ -94,10 +93,10 @@ const AddProducts = () => {
                   </div>
                 </div>
                 <div className="form-control w-full">
-                     <input type="email" name="email" placeholder="user email" className="input input-bordered bg-secendaryColor" value={user?.email} />
+                     <input type="email" name="email" placeholder="user email" className="input input-bordered bg-secendaryColor" value={user?.email} readOnly/>
                 </div>
                 <div className="form-control w-full">
-                     <input type="text" name="username" placeholder="username" className="input input-bordered bg-secendaryColor" value={user?.displayName} />
+                     <input type="text" name="username" placeholder="username" className="input input-bordered bg-secendaryColor" value={user?.displayName} readOnly/>
                 </div>
                 </div>
                 <button type="submit">Add</button>

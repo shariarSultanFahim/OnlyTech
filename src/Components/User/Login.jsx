@@ -4,6 +4,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import Lottie from "react-lottie";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import useDocumentTitle from "../../CustomHooks/useDocumentTitle";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import animationData from "/public/LoginAnimation";
@@ -12,7 +13,8 @@ const Login = () => {
   useDocumentTitle('Login');
   
   const [passVisibility,setPassVisibility] = useState(false);
-  const {loginUser, googleLogin, setUser, user} = useContext(AuthContext)
+  const {loginUser, googleLogin, setUser, user} = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const handlePassVisibility = () =>{
     setPassVisibility(!passVisibility);
   }
@@ -62,7 +64,15 @@ const Login = () => {
   const handleGoogleLogin = () =>{
     googleLogin()
     .then(result =>{
-        setUser(result.user)
+        setUser(result.user);
+        const signUpUser = {
+          email:result.user.email,
+          name:result.user.displayName,
+          photo:result.user.photoURL,
+          membershipType : 'free',
+          userType : 'user'
+        }
+        axiosSecure.post('/users',signUpUser);
         toast.success('Logged in sucessfully!',{
           position:"top-center",
           style: {

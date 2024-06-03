@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { AiFillProduct, AiOutlineProduct } from "react-icons/ai";
+import { AiFillProduct, AiOutlineLogout, AiOutlineProduct } from "react-icons/ai";
 import { IoHome } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 const DashboardNavbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user,logOut } = useContext(AuthContext);
 
 
   const items = <>
@@ -24,6 +24,12 @@ const DashboardNavbar = () => {
             <li className="inline-flex items-center gap-4">
               <AiOutlineProduct  className="text-xl" />
               My Products
+            </li>
+    </NavLink>
+    <NavLink >
+            <li onClick={()=>logOut()} className="inline-flex items-center gap-4">
+              <AiOutlineLogout  className="text-xl" />
+              Logout
             </li>
     </NavLink>
 </>
