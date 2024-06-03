@@ -4,6 +4,10 @@ import * as ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthProvider from "./Components/AuthProvider/AuthProvider";
 import AddProducts from "./Components/Dashboard/AddProducts";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import DashboardHome from "./Components/Dashboard/DashboardHome";
+import MyProducts from "./Components/Dashboard/MyProducts";
+import MyProfile from "./Components/Dashboard/MyProfile";
 import Error from "./Components/ErrorRoute/Error";
 import Home from "./Components/Home/Home";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
@@ -37,12 +41,33 @@ const router = createBrowserRouter([
         path:'/products',
         element:<Products/>
       },
-      {
-        path:'/addproducts',
-        element:<PrivateRoute><AddProducts/></PrivateRoute>
-      }
+      
     ],
   },
+  {
+    path:"/dashboard",
+    element:<Dashboard/>,
+    errorElement:<Error/>,
+    children:[
+      {
+        path:"/dashboard",
+        element:<PrivateRoute><DashboardHome/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/addproducts',
+        element:<PrivateRoute><AddProducts/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/myProfile',
+        element:<PrivateRoute><MyProfile/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/MyProducts',
+        element:<PrivateRoute><MyProducts/></PrivateRoute>
+      }
+    ]
+  }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

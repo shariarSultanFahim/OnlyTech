@@ -9,11 +9,11 @@ const PrivateRoute = ({children}) => {
     const {userLoding, user} = useContext(AuthContext)
 
     if(user){
-        return children
+        return children;
     }
-    else if(userLoding){
+    if(userLoding){
         <div className="min-h-screen grid place-items-center">
-            <ReactLoading type={'spinningBubbles'} color={'#0E7490'} height={100} width={100}/>
+            <ReactLoading type={'spinningBubbles'} color={'#bac3bf'} height={100} width={100}/>
         </div>
     }
 

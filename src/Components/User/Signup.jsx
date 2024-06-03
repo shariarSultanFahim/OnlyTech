@@ -73,7 +73,7 @@ const Signup = () => {
                 displayName:name,
                 photoURL:photo
             });
-            setUser(result.user);
+            
             toast.success('Sign Up sucessfully!',{
                 position:"top-center",
                 style: {
@@ -121,7 +121,7 @@ useEffect(()=>{
             navigate(location.state);
         },1000); 
     }
-},[user]);  
+},[user,location.state,navigate])  
 
   return (
     <div className="hero w-full">

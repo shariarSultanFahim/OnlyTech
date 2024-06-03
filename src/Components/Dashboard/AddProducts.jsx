@@ -60,7 +60,7 @@ const AddProducts = () => {
         }
     }
     return (
-        <div className="hero min-h-screen w-full">
+        <div className="hero w-full h-full">
         <div className="hero-content flex-row-reverse w-full">
             <div className="card shrink-0 w-full max-w-sm shadow-2xl">
             <form className="card-body bg-primaryColor rounded-lg" onSubmit={handleAddProduct}>
