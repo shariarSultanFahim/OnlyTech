@@ -61,7 +61,7 @@ const DashboardNavbar = () => {
     <div className="hidden lg:flex flex-col items-center gap-16 p-4 h-full bg-primaryColor">
       <div className="space-y-4 text-center">
         <div className="overflow-hidden rounded-full h-52 w-52">
-          <img src={user?.photoURL} alt="User Photo" />
+          <img className="h-full w-full" src={user?.photoURL} alt="User Photo" />
         </div>
         <div className="space-y-2">
           <h1 className="text-4xl">{user?.displayName}</h1>

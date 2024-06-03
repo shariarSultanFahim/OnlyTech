@@ -88,7 +88,7 @@ useEffect(()=>{
             navigate(location.state);
         },1000); 
     }
-},[user,location.state,navigate]);  
+});  
 
   return (
     <div className="hero min-h-screen w-full">

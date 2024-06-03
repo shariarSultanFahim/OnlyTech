@@ -6,17 +6,18 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const PrivateRoute = ({children}) => {
 
     const location = useLocation()
-    const {userLoding, user} = useContext(AuthContext)
+    const {user,userLoading} = useContext(AuthContext)
 
+    if(userLoading){
+        return(
+            <div className="min-h-screen grid place-items-center">
+                <ReactLoading type={'spinningBubbles'} color={'#bac3bf'} height={100} width={100}/>
+            </div>
+        )
+    }
     if(user){
         return children;
     }
-    if(userLoding){
-        <div className="min-h-screen grid place-items-center">
-            <ReactLoading type={'spinningBubbles'} color={'#bac3bf'} height={100} width={100}/>
-        </div>
-    }
-
     return <Navigate to="/login" state={location.pathname}></Navigate>
 };
 
