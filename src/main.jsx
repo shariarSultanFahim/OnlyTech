@@ -4,6 +4,9 @@ import * as ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthProvider from "./Components/AuthProvider/AuthProvider";
 import AddProducts from "./Components/Dashboard/AddProducts";
+import ManageCoupons from "./Components/Dashboard/Admin/ManageCoupons";
+import ManageUsers from "./Components/Dashboard/Admin/ManageUsers";
+import Statistics from "./Components/Dashboard/Admin/Statistics";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import MyProducts from "./Components/Dashboard/MyProducts";
 import MyProfile from "./Components/Dashboard/MyProfile";
@@ -68,6 +71,18 @@ const router = createBrowserRouter([
       {
         path:'/dashboard/updateProduct/:id',
         element:<PrivateRoute><UpdateProduct/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/statistics',
+        element:<PrivateRoute><Statistics/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/manageUsers',
+        element:<PrivateRoute><ManageUsers/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/manageCoupons',
+        element:<PrivateRoute><ManageCoupons/></PrivateRoute>
       }
     ]
   }

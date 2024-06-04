@@ -63,6 +63,9 @@ const MyProducts = () => {
 
   return (
     <div>
+      <div className="border-b-2 p-4">
+                <h1 className="text-2xl">My Products</h1>
+            </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

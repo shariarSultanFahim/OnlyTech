@@ -1,44 +1,90 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AiOutlineLogout, AiOutlineMenu, AiOutlineProduct, AiOutlineProfile } from "react-icons/ai";
+import { FcStatistics } from "react-icons/fc";
 import { IoHomeOutline } from "react-icons/io5";
+import { LuUserSquare } from "react-icons/lu";
+import { RiCoupon2Line } from "react-icons/ri";
+import ReactLoading from "react-loading";
 import { NavLink } from "react-router-dom";
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+
+
 const DashboardNavbar = () => {
   const { user,logOut } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+    const {data:userData,isPending:userDataLoading} = useQuery({
+        queryKey:['usersData',user],
+        queryFn: async()=>{
+            const res = await axiosSecure.get(`/users?email=${user?.email}`);
+            return res.data;
+        }
+    })
 
+    if(userDataLoading){
+      return (
+        <div className="min-h-screen grid place-items-center">
+        <ReactLoading
+          type={"spinningBubbles"}
+          color={"#bac3bf"}
+          height={100}
+          width={100}
+        />
+      </div>
+      )
+    }
 
   const items = <>
-  <NavLink to={"/"}>
+    <NavLink to={"/"}>
             <li className="inline-flex items-center gap-4">
               <IoHomeOutline className="text-xl" />
               Home
             </li>
     </NavLink>
-    <NavLink to={"/dashboard/myProfile"}>
+    {(userData.userType === 'user') && <NavLink to={"/dashboard/myProfile"}>
             <li className="inline-flex items-center gap-4">
               <AiOutlineProfile className="text-xl" />
               My Profile
             </li>
-    </NavLink>
-    <NavLink to={"/dashboard/addProducts"}>
+    </NavLink>}
+    {(userData.userType === 'user') && <NavLink to={"/dashboard/addProducts"}>
             <li className="inline-flex items-center gap-4">
               <AiOutlineProduct className="text-xl" />
               Add Products
             </li>
-    </NavLink>
-    <NavLink to={"/dashboard/myProducts"}>
+    </NavLink>}
+    {(userData.userType === 'user') && <NavLink to={"/dashboard/myProducts"}>
             <li className="inline-flex items-center gap-4">
               <AiOutlineMenu className="text-xl" />
               My Products
             </li>
-    </NavLink>
+    </NavLink>}
+    {(userData.userType === 'admin') && <NavLink to={"/dashboard/statistics"}>
+            <li className="inline-flex items-center gap-4">
+              <FcStatistics className="text-xl" />
+              Statistics
+            </li>
+    </NavLink>}
+    {(userData.userType === 'admin') && <NavLink to={"/dashboard/manageUsers"}>
+            <li className="inline-flex items-center gap-4">
+              <LuUserSquare className="text-xl" />
+              Manage Users
+            </li>
+    </NavLink>}
+    {(userData.userType === 'admin') && <NavLink to={"/dashboard/manageCoupons"}>
+            <li className="inline-flex items-center gap-4">
+              <RiCoupon2Line className="text-xl" />
+              Manage Coupons
+            </li>
+    </NavLink>}
     <NavLink >
             <li onClick={()=>logOut()} className="inline-flex items-center gap-4">
               <AiOutlineLogout  className="text-xl" />
               Logout
             </li>
     </NavLink>
-</>
+  </>
 
   return (
     <div className="h-full">

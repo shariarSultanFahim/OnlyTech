@@ -86,7 +86,7 @@ const UpdateProduct = () => {
       } 
       }
       else{
-        product.productImg = currentProduct?.productImg
+        // product.productImg = currentProduct?.productImg
         await axiosSecure.put(`/products/update?id=${id}`,product).then(res=>console.log(res.data));
       // console.log(res2)
       toast.success('Product Updated Sucessfully',{
