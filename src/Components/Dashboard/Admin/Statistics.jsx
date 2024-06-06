@@ -7,20 +7,27 @@ const Statistics = () => {
     useDocumentTitle('Statistics');
     const axiosSecure = useAxiosSecure();
 
-    const {data:usersData={}} = useQuery({
+    const {data:usersData, isPending:usersPending} = useQuery({
         queryKey:['users-type'],
         queryFn: async()=>{
             const res = await axiosSecure.get('/users/types');
             return res.data;
         }
     })
-    const {data:productsData={}} = useQuery({
+    const {data:productsData,isPending} = useQuery({
         queryKey:['products-type'],
         queryFn: async()=>{
             const res = await axiosSecure.get('/products/types');
             return res.data;
         }
     })
+    if(usersPending || isPending){
+        return (
+            <div className='flex justify-center items-center w-full h-full'>
+                <span className="loading loading-dots loading-lg"></span>
+            </div>
+        )
+    }
 
     const data01 = [
         { name: 'Group A', value: 400 },
@@ -55,7 +62,7 @@ const Statistics = () => {
             <div className='w-80 mx-auto'>
                 <h1 className='text-center text-2xl'>Products</h1>
                <PieChart  width={320} height={320}>
-               <Pie
+                <Pie
                     data={productsData}
                     cx="50%"
                     cy="50%"

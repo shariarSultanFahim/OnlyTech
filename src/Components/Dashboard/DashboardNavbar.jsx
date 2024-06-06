@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AiOutlineLogout, AiOutlineMenu, AiOutlineProduct, AiOutlineProfile } from "react-icons/ai";
 import { FcStatistics } from "react-icons/fc";
+import { GoReport } from "react-icons/go";
 import { IoHomeOutline } from "react-icons/io5";
 import { LuUserSquare } from "react-icons/lu";
 import { RiCoupon2Line } from "react-icons/ri";
@@ -34,6 +35,7 @@ const DashboardNavbar = () => {
       </div>
       )
     }
+    // console.log(user,userData);
 
   const items = <>
     <NavLink to={"/"}>
@@ -58,6 +60,18 @@ const DashboardNavbar = () => {
             <li className="inline-flex items-center gap-4">
               <AiOutlineMenu className="text-xl" />
               My Products
+            </li>
+    </NavLink>}
+    {(userData.userType === 'modarator') && <NavLink to={"/dashboard/productReview"}>
+            <li className="inline-flex items-center gap-4">
+              <AiOutlineMenu className="text-xl" />
+              Product Review
+            </li>
+    </NavLink>}
+    {(userData.userType === 'modarator') && <NavLink to={"/dashboard/reportedContent"}>
+            <li className="inline-flex items-center gap-4">
+              <GoReport className="text-xl" />
+              Reported Products
             </li>
     </NavLink>}
     {(userData.userType === 'admin') && <NavLink to={"/dashboard/statistics"}>

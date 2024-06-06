@@ -8,6 +8,8 @@ import ManageCoupons from "./Components/Dashboard/Admin/ManageCoupons";
 import ManageUsers from "./Components/Dashboard/Admin/ManageUsers";
 import Statistics from "./Components/Dashboard/Admin/Statistics";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import ProductReview from "./Components/Dashboard/Modarator/ProductReview";
+import ReportedContent from "./Components/Dashboard/Modarator/ReportedContent";
 import MyProducts from "./Components/Dashboard/MyProducts";
 import MyProfile from "./Components/Dashboard/MyProfile";
 import UpdateProduct from "./Components/Dashboard/UpdateProduct";
@@ -83,7 +85,16 @@ const router = createBrowserRouter([
       {
         path:'/dashboard/manageCoupons',
         element:<PrivateRoute><ManageCoupons/></PrivateRoute>
-      }
+      },
+      {
+        path:'/dashboard/productReview',
+        element:<PrivateRoute><ProductReview/></PrivateRoute>
+      },
+      {
+        path:'/dashboard/reportedContent',
+        element:<PrivateRoute><ReportedContent/></PrivateRoute>
+      },
+      
     ]
   }
 

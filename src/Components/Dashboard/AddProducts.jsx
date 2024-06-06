@@ -35,7 +35,8 @@ const AddProducts = () => {
         author: user?.displayName,
         authorPhoto:user?.photoURL,
         postedTime: new Date().toISOString(),
-        upVote:0
+        upVote:0,
+        status:'pending'
       }
       product = Object.assign({},data,additionalData)
       if(product?.productImg[0]?.name){

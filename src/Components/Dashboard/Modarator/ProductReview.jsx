@@ -1,21 +1,20 @@
 import { useContext, useState } from "react";
 import ReactLoading from "react-loading";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
-import useDocumentTitle from "../../CustomHooks/useDocumentTitle";
-import { AuthContext } from "../AuthProvider/AuthProvider";
+import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import useDocumentTitle from "../../../CustomHooks/useDocumentTitle";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-const MyProducts = () => {
-    useDocumentTitle('My Products')
+
+const ProductReview = () => {
+  useDocumentTitle("Review Product");
   const axiosSecure = useAxiosSecure();
-  const { user, usersProducts, usersProductLoading,refetchUsersProducts,refetchProducts,featuredRefetch } = useContext(AuthContext);
+  const { products, productsLoadig,refetchProducts, refetchAcceptedProducts,featuredRefetch } = useContext(AuthContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-
-  if (usersProductLoading) {
+  if (productsLoadig) {
     return (
       <div className="min-h-screen grid place-items-center">
         <ReactLoading
@@ -28,9 +27,9 @@ const MyProducts = () => {
     );
   }
 
-  const totalPage = Math.ceil([usersProducts?.length / itemsPerPage]);
+  const totalPage = Math.ceil([products?.length / itemsPerPage]);
 
-  const currentProducts = usersProducts?.slice(
+  const currentProducts = products?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -39,45 +38,36 @@ const MyProducts = () => {
     setCurrentPage(page);
   };
 
-  const handleDelete = (id)=>{
-    Swal.fire({
-        title: "Do you want to delete the product?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Delete",
-        denyButtonText: `Don't Delete`
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            const res = axiosSecure.delete(`/products/delete?id=${id}`).then((result)=>{
-                refetchUsersProducts();
-                refetchProducts(); 
-            }
-          );
-          axiosSecure.delete(`/featured/delete?id=${id}`).then((result)=>{
-            featuredRefetch();
-          })
-
-          Swal.fire("Saved!", "", "success");
-        } else if (result.isDenied) {
-          Swal.fire("Changes are not saved", "", "info");
-        }
-      });
+  const handleMakeFeatured = async(product) => {
+    await axiosSecure.post('/featured/add',product);
+    refetchProducts(),
+    refetchAcceptedProducts(),
+    featuredRefetch()
   }
-
-
+  const handleAccept = async(id) => {
+    const product = {status : 'accepted'};
+    await axiosSecure.put(`/products/update?id=${id}`,product);
+    refetchProducts(),
+    refetchAcceptedProducts()
+  };
+  const handleReject = async(id) => {
+    const product = {status : 'rejected'};
+    await axiosSecure.put(`/products/update?id=${id}`,product);
+    refetchProducts(),
+    refetchAcceptedProducts()
+  };
   return (
     <div>
       <div className="border-b-2 p-4">
-                <h1 className="text-2xl">My Products</h1>
-            </div>
+        <h1 className="text-2xl">Product Review Queue</h1>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
           <thead>
             <tr>
               <th>Product Name</th>
-              <th>Up Votes</th>
+              <th>Product Details</th>
               <th>Status</th>
               <th></th>
               <th></th>
@@ -99,16 +89,27 @@ const MyProducts = () => {
                     </div>
                   </div>
                 </td>
-                <td>{product.upVote}</td>
+                <td>
+                    <button className="btn btn-ghost btn-xs bg-primaryColor">
+                        <Link to={`/products/${product._id}`}>Details</Link>
+                    </button>
+                </td>
                 <td>{product.status}</td>
                 <th>
-                  <Link to={`/dashboard/updateProduct/${product._id}`}><button  className="btn btn-ghost btn-xs bg-primaryColor">
-                    Update
-                  </button></Link>
+                 <button
+                 disabled = {product.status !== 'accepted'}
+                 onClick={()=>handleMakeFeatured(product)}  className="btn btn-ghost btn-xs bg-primaryColor">
+                    Make Featured
+                  </button>
                 </th>
                 <th>
-                  <button onClick={()=>handleDelete(product._id)} className="btn btn-ghost btn-xs bg-red-300">
-                    Delete
+                 <button onClick={()=>handleAccept(product._id)} className="btn btn-ghost btn-xs bg-primaryColor">
+                    Accept
+                  </button>
+                </th>
+                <th>
+                  <button onClick={()=>handleReject(product._id)} className="btn btn-ghost btn-xs bg-red-300">
+                    Reject
                   </button>
                 </th>
               </tr>
@@ -118,7 +119,7 @@ const MyProducts = () => {
           <tfoot>
             <tr>
               <th>Product Name</th>
-              <th>Up Votes</th>
+              <th>Product Details</th>
               <th>Status</th>
               <th></th>
               <th></th>
@@ -143,4 +144,4 @@ const MyProducts = () => {
   );
 };
 
-export default MyProducts;
+export default ProductReview;

@@ -13,7 +13,7 @@ const UpdateProduct = () => {
     useDocumentTitle('Update Products');
     const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY;
     const imagebb_api = `https://api.imgbb.com/1/upload?key=${imagebb_key}`;
-    const {user,refetchProducts,refetchUsersProducts}=useContext(AuthContext);
+    const {user,refetchProducts,refetchUsersProducts,featuredRefetch}=useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const {id} = useParams();
     const [imageUpload, setImageUpload]=useState(true);
@@ -52,7 +52,7 @@ const UpdateProduct = () => {
       let product = {};
 
       product = Object.assign({},data)
-      console.log(product);
+      // console.log(product);
       if(product?.productImg[0]?.name){
       const imageFile = {image: data.productImg[0]};
       const res = await axios.post(imagebb_api, imageFile, {
@@ -66,6 +66,7 @@ const UpdateProduct = () => {
       product.productImg = res.data.data.display_url;
       // console.log(product);
       await axiosSecure.put(`/products/update?id=${id}`,product);
+      await axiosSecure.put(`/featured/update?id=${id}`,product);
       // console.log(res2)
       toast.success('Product Updated Sucessfully',{
           position:"top-center",
@@ -82,12 +83,14 @@ const UpdateProduct = () => {
       reset();
       refetchProducts();
       refetchUsersProducts();
+      featuredRefetch();
       navigate(location.state);
       } 
       }
       else{
         // product.productImg = currentProduct?.productImg
-        await axiosSecure.put(`/products/update?id=${id}`,product).then(res=>console.log(res.data));
+        await axiosSecure.put(`/products/update?id=${id}`,product);
+        await axiosSecure.put(`/featured/update?id=${id}`,product);
       // console.log(res2)
       toast.success('Product Updated Sucessfully',{
           position:"top-center",
@@ -104,6 +107,7 @@ const UpdateProduct = () => {
       reset();
       refetchProducts();
       refetchUsersProducts();
+      featuredRefetch();
       navigate(location.state);
       }
         

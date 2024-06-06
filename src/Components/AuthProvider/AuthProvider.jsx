@@ -52,6 +52,13 @@ const AuthProvider = ({ children }) => {
       return res.data
     }
   })
+  const {data:acceptedProducts, isPending:acceptedProductsLoading,refetch:refetchAcceptedProducts} = useQuery({
+    queryKey:['accepted-products'],
+    queryFn: async ()=>{
+      const res =await axiosSecure.get('/acceptedProducts')
+      return res.data
+    }
+  })
 
   const {data:usersProducts,isPending:usersProductLoading,refetch:refetchUsersProducts}=useQuery({
     queryKey:['usersProduct',user],
@@ -59,6 +66,13 @@ const AuthProvider = ({ children }) => {
         const res = await axiosSecure.get(`/products?email=${user?.email}`);
         return res.data;
     }
+})
+const {data:featured,refetch:featuredRefetch} = useQuery({
+  queryKey:['featured-products'],
+  queryFn:async()=>{
+      const res = await axiosSecure.get('/featured');
+      return res.data
+  }
 })
 
 
@@ -74,9 +88,14 @@ const AuthProvider = ({ children }) => {
     products,
     productsLoadig,
     refetchProducts,
+    acceptedProducts,
+    acceptedProductsLoading,
+    refetchAcceptedProducts,
     usersProducts,
     usersProductLoading,
-    refetchUsersProducts
+    refetchUsersProducts,
+    featured,
+    featuredRefetch
   };
 
   return (

@@ -31,6 +31,7 @@ const ManageUsers = () => {
       </div>
       )
     }
+    
 
     const usersPerPage = 6;
     const totalPage = Math.ceil([users?.length / usersPerPage]);
