@@ -91,7 +91,7 @@ const ProductReview = () => {
                 </td>
                 <td>
                     <button className="btn btn-ghost btn-xs bg-primaryColor">
-                        <Link to={`/products/${product._id}`}>Details</Link>
+                        <Link to={`/product/${product._id}`}>Details</Link>
                     </button>
                 </td>
                 <td>{product.status}</td>

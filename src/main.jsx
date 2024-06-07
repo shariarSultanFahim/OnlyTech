@@ -16,6 +16,7 @@ import UpdateProduct from "./Components/Dashboard/UpdateProduct";
 import Error from "./Components/ErrorRoute/Error";
 import Home from "./Components/Home/Home";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import ProductDetails from "./Components/Products/ProductDetails";
 import Products from "./Components/Products/Products";
 import Root from "./Components/Root/Root";
 import Login from "./Components/User/Login";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         path:'/products',
         element:<Products/>
       },
+      {
+        path:'/product/:id',
+        element:<PrivateRoute><ProductDetails/></PrivateRoute>
+      }
       
     ],
   },

@@ -10,8 +10,7 @@ const Products = () => {
 
     const {data:searcedProducts, isPending,refetch:refetchSearchedProducts} = useQuery({
         queryKey:['searchedProducts',searchKeyWord],
-        queryFn: async (searchKeyWord)=>{
-          
+        queryFn: async (searchKeyWord)=>{   
           const query = searchKeyWord.queryKey[1] != undefined? `?search=${searchKeyWord.queryKey[1]}`:'';
           const res =await axiosSecure.get(`/products/search${query}`);
           return res.data;
