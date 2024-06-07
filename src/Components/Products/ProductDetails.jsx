@@ -5,13 +5,13 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import useDocumentTitle from "../../CustomHooks/useDocumentTitle";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import ReviewSection from "./ReviewSection";
 
 const ProductDetails = () => {
     useDocumentTitle('Details');
     const {id} = useParams();
     const axiosSecure = useAxiosSecure();
     const {user,refetchProducts}=useContext(AuthContext);
-
     const {data:product,isPending} = useQuery({
         queryKey:['product-details',id],
         queryFn: async()=>{
@@ -25,10 +25,25 @@ const ProductDetails = () => {
         refetchProducts();
     }
 
+    const handleReport = () =>{
+        const report =
+        {
+            productID: product?._id,
+            reporterBy: user?.email,
+            productName: product?.productName,
+            productImg: product?.productImg,
+            author: product?.author,
+            tag: product?.tag
+        }
+        axiosSecure.post('/product/report',report).then((result) => {
+            console.log(result.data);
+        })
+    }
+
     return (
         <div className="max-w-screen-xl mx-auto my-10 min-h-screen">
-            <section className="p-4 flex flex-col lg:flex-row justify-between items-start gap-4">
-                <div className="overflow-hidden lg:w-2/5 rounded-md">
+            <section className="flex flex-col lg:flex-row justify-between items-center gap-4 px-2 lg:px-0">
+                <div className="overflow-hidden h-80 lg:w-2/5 rounded-md">
                     <img className="w-full h-full object-cover" src={product?.productImg} alt="Product Image" />
                 </div>
                 <div className="lg:w-3/5 flex flex-col gap-4 lg:gap-0 lg:flex-row items-start">
@@ -37,15 +52,17 @@ const ProductDetails = () => {
                         <h1 className="text-5xl">{product?.productName}</h1>
                         <p className="text-xl opacity-80">{product?.description}</p>
                         <p className="text-md opacity-80">Tags: {product?.tag}</p>
+                        <button onClick={handleReport} className="p-2 bg-red-400 rounded-md text-white font-semibold">Report</button>
                     </div>
                     <div className="flex items-center justify-center gap-2">
                         <button onClick={() => window.open(product?.productLink, '_blank', 'noopener,noreferrer')} className="btn">Visit</button>
-                        <button onClick={handleUpVote} disabled={product.email == user?.email || product?.upvoteEmail?.includes(user?.email)} className="btn bg-primaryColor">
+                        <button onClick={handleUpVote} disabled={product?.email == user?.email || product?.upvoteEmail?.includes(user?.email)} className="btn bg-primaryColor">
                             <IoMdArrowDropup className="text-2xl"/> Upvote {product?.upVote}</button>
                     </div>
                 </div>
             </section>
-        </div>
+            <ReviewSection/>
+        </div> 
     );
 };
 
