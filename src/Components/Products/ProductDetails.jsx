@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 import useDocumentTitle from "../../CustomHooks/useDocumentTitle";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import ReviewCard from "./ReviewCard";
 import ReviewSection from "./ReviewSection";
 
 const ProductDetails = () => {
@@ -12,14 +13,27 @@ const ProductDetails = () => {
     const {id} = useParams();
     const axiosSecure = useAxiosSecure();
     const {user,refetchProducts}=useContext(AuthContext);
-    const {data:product,isPending} = useQuery({
+    
+    const {data:product={}} = useQuery({
         queryKey:['product-details',id],
         queryFn: async()=>{
             const {data} = await axiosSecure.get(`/products?id=${id}`);
             return data;
         }
     })
-    
+
+    const {data:reviews,refetch:refetchReview,isPending:reviewLoading} = useQuery({
+        queryKey:['review',id],
+        queryFn: async()=>{
+            const {data} = await axiosSecure.get(`/review?id=${id}`);
+            return data;
+        }
+    })
+    if(reviewLoading){
+        return (
+            <div>Loading...</div>
+        )
+    }
     const handleUpVote = () =>{
         axiosSecure.post(`products/vote?id=${product?._id}&email=${user?.email}`);
         refetchProducts();
@@ -61,7 +75,25 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </section>
-            <ReviewSection/>
+
+            <section className="my-10 py-10">
+                <div>
+                    <h1 className="p-2 text-xl font-semibold border-b-4 border-primaryColor opacity-90">Reviews</h1>
+                </div>
+                {
+                (user?.email === product?.email)?"You can't review your own post" 
+                :
+                (reviews?.some(review => review?.userEmail === user?.email))?
+                "You've already posted a review"
+                :
+                <ReviewSection product={product} refetchReview={refetchReview}/>
+                }
+            </section>
+            <section className="flex flex-wrap justify-evenly ">
+                {
+                    reviews?.map(review => <ReviewCard key={review?._id} review={review}/>)
+                }
+            </section>
         </div> 
     );
 };
